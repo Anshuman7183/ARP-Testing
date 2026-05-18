@@ -10,7 +10,9 @@ import { HomePage } from '../pages/HomePage';
 
 import { BookingPage } from '../pages/BookingPage';
 
-import bookingData from '../fixtures/bookingData.json';
+import bookingData from '../assets/bookingData.json';
+
+let testData: any;
 
 let homePage: HomePage;
 
@@ -20,13 +22,16 @@ let bookingPage: BookingPage;
 // ====================== GIVEN ======================
 
 Given(
-  'User opens the hotel website',
+
+  'We open hotel website',
 
   async function () {
 
-    homePage = new HomePage(this.page);
+    const page = this.page;
 
-    bookingPage = new BookingPage(this.page);
+    homePage = new HomePage(page);
+
+    bookingPage = new BookingPage(page);
 
     console.log('Opening Website');
 
@@ -39,29 +44,79 @@ Given(
 );
 
 
-// ====================== WHEN ======================
+// ====================== SINGLE ROOM DATES ======================
 
 When(
-  'User selects valid booking dates',
+  'We select single room booking dates',
 
   async function () {
+
+    testData = bookingData.TC_001;
 
     console.log('Selecting Dates');
 
     await bookingPage.selectDates(
-      bookingData.arrival,
-      bookingData.departure
+      testData.arrival,
+      testData.departure
     );
+
+    console.log('Dates selected successfully');
   }
 );
 
 
+// ====================== DOUBLE ROOM DATES ======================
+
 When(
-  'User selects a room',
+  'We select double room booking dates',
 
   async function () {
 
-    console.log('Selecting Room');
+    testData = bookingData.TC_002;
+
+    console.log('Selecting Dates');
+
+    await bookingPage.selectDates(
+      testData.arrival,
+      testData.departure
+    );
+
+    console.log('Dates selected successfully');
+  }
+);
+
+
+// ====================== SUITE ROOM DATES ======================
+
+When(
+  'We select suite room booking dates',
+
+  async function () {
+
+    testData = bookingData.TC_003;
+
+    console.log('Selecting Dates');
+
+    await bookingPage.selectDates(
+      testData.arrival,
+      testData.departure
+    );
+
+    console.log('Dates selected successfully');
+  }
+);
+
+
+// ====================== ROOM SELECTION ======================
+
+When(
+  'We select single room',
+
+  async function () {
+
+    testData = bookingData.TC_001;
+
+    console.log('Selecting Single Room');
 
     await bookingPage.selectRoom();
   }
@@ -69,24 +124,63 @@ When(
 
 
 When(
-  'User enters valid booking details',
+  'We select double room',
+
+  async function () {
+
+    testData = bookingData.TC_002;
+
+    console.log('Selecting Double Room');
+
+    await bookingPage.selectDoubleRoom();
+  }
+);
+
+
+When(
+  'We select suite room',
+
+  async function () {
+
+    testData = bookingData.TC_003;
+
+    console.log('Selecting Suite Room');
+
+    await bookingPage.selectSuiteRoom();
+  }
+);
+
+When(
+  'We open booking form',
+
+  async function () {
+
+    console.log('Opening booking form');
+
+    await bookingPage.openBookingForm();
+  }
+);
+
+
+When(
+  'We enter valid booking details',
 
   async function () {
 
     console.log('Filling Booking Details');
 
     await bookingPage.fillBookingDetails(
-      bookingData.firstname,
-      bookingData.lastname,
-      bookingData.email,
-      bookingData.phone
+      testData.firstname,
+      testData.lastname,
+      testData.email,
+      testData.phone
     );
   }
 );
 
 
 When(
-  'User clicks reserve now button',
+  'We confirm booking',
 
   async function () {
 

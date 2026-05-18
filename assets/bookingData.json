@@ -1,0 +1,28 @@
+{
+  "TC_001": {
+    "arrival": "2026-05-20",
+    "departure": "2026-05-25",
+    "firstname": "Anshuman",
+    "lastname": "Nayak",
+    "email": "single@test.com",
+    "phone": "919876543210"
+  },
+
+  "TC_002": {
+    "arrival": "2026-06-01",
+    "departure": "2026-06-05",
+    "firstname": "Rahul",
+    "lastname": "Sharma",
+    "email": "double@test.com",
+    "phone": "919876543211"
+  },
+
+  "TC_003": {
+    "arrival": "2026-07-10",
+    "departure": "2026-07-15",
+    "firstname": "Amit",
+    "lastname": "Patel",
+    "email": "suite@test.com",
+    "phone": "919876543212"
+  }
+}

@@ -15,19 +15,24 @@ setDefaultTimeout(60000);
 
 let browser: Browser;
 
+let page: Page;
+
+
 Before(async function () {
 
   browser = await chromium.launch({
-    headless: false
+
+    headless: false,
+
+    slowMo: 800
   });
 
-  const context = await browser.newContext();
-
-  const page = await context.newPage();
+  page = await browser.newPage();
 
   // Make page globally available
   this.page = page;
 });
+
 
 After(async function ({ result, pickle }) {
 

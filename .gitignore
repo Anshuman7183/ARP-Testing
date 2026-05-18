@@ -8,3 +8,5 @@ blob-report/
 /playwright/.auth/
 .last-run.json
 reports/
+dist/
+.cache/
