@@ -1,0 +1,15 @@
+{
+  "name": "arp-testing",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "cucumber-js features/**/*.feature --require-module ts-node/register --require step-definitions/**/*.ts --require support/**/*.ts"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.8.0",
+    "@playwright/test": "^1.52.0",
+    "multiple-cucumber-html-reporter": "^3.10.0",
+    "playwright": "^1.52.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

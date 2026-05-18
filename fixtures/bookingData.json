@@ -1,0 +1,10 @@
+{
+  "arrival": "2026-06-20",
+  "departure": "2026-06-25",
+  "firstname": "Anshuman",
+  "lastname": "Nayak",
+  "email": "anshuman@test.com",
+  "invalidEmail": "anshuman.com",
+  "phone": "9876543210",
+  "invalidPhone": "123"
+}
