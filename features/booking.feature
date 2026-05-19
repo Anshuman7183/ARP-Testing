@@ -1,62 +1,80 @@
 Feature: Hotel Booking Functionality
 
-  @TC_001
-  @smoke
-  @booking
 
-  Scenario: Successful room booking
+# ======================================================
+# SINGLE ROOM BOOKING
+# ======================================================
 
-    Given We open hotel website
+@smoke
+@regression
+@singleRoom
+@TC_001
+@booking
 
-    When We select single room booking dates
+Scenario: Successful single room booking
 
-    And We select single room
+Given We open hotel website
 
-    And We open booking form
+When We select single room booking dates
 
-    And We enter valid booking details
+And We select single room
 
-    And We confirm booking
+And We open booking form
 
-    Then Booking should be successful
+And We enter valid booking details
 
-  @TC_002
-  @smoke
-  @doubleRoom
+And We confirm booking
 
-  Scenario: Successful double room booking
-
-    Given We open hotel website
-
-    When We select double room booking dates
-
-    And We select double room
-
-    And We open booking form
-
-    And We enter valid booking details
-
-    And We confirm booking
-
-    Then Booking should be successful
+Then Booking should be successful
 
 
-  @TC_003
-  @smoke
-  @suiteRoom
 
-  Scenario: Successful suite room booking
+# ======================================================
+# DOUBLE ROOM BOOKING
+# ======================================================
 
-    Given We open hotel website
+@regression
+@doubleRoom
+@TC_002
 
-    When We select suite room booking dates
+Scenario: Successful double room booking
 
-    And We select suite room
+Given We open hotel website
 
-    And We open booking form
+When We select double room booking dates
 
-    And We enter valid booking details
+And We select double room
 
-    And We confirm booking
+And We open booking form
 
-    Then Booking should be successful  
+And We enter valid booking details
+
+And We confirm booking
+
+Then Booking should be successful
+
+
+
+# ======================================================
+# SUITE ROOM BOOKING
+# ======================================================
+
+@regression
+@suiteRoom
+@TC_003
+
+Scenario: Successful suite room booking
+
+Given We open hotel website
+
+When We select suite room booking dates
+
+And We select suite room
+
+And We open booking form
+
+And We enter valid booking details
+
+And We confirm booking
+
+Then Booking should be successful

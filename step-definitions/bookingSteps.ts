@@ -12,6 +12,10 @@ import { BookingPage } from '../pages/BookingPage';
 
 import bookingData from '../assets/bookingData.json';
 
+import complexBookingData from '../assets/complexBookingData.json';
+
+import { getFutureDate } from '../utils/dateUtils';
+
 let testData: any;
 
 let homePage: HomePage;
@@ -21,27 +25,22 @@ let bookingPage: BookingPage;
 
 // ====================== GIVEN ======================
 
-Given(
+Given('We open hotel website', async function () {
 
-  'We open hotel website',
+  const page = this.page;
 
-  async function () {
+  homePage = new HomePage(page);
 
-    const page = this.page;
+  bookingPage = new BookingPage(page);
 
-    homePage = new HomePage(page);
+  console.log('Opening Website');
 
-    bookingPage = new BookingPage(page);
+  await homePage.openWebsite();
 
-    console.log('Opening Website');
+  await homePage.verifyHomepageLoaded();
 
-    await homePage.openWebsite();
-
-    await homePage.verifyHomepageLoaded();
-
-    console.log('Homepage Loaded');
-  }
-);
+  console.log('Homepage Loaded');
+});
 
 
 // ====================== SINGLE ROOM DATES ======================
@@ -205,3 +204,71 @@ Then(
     console.log('Booking Successful');
   }
 );
+
+
+// ====================== COMPLEX BOOKING SCENARIOS ======================
+
+for (const scenario of complexBookingData) {
+
+  Then(
+
+    `Execute ${scenario.testCase}`,
+
+    async function () {
+
+      console.log(`Executing ${scenario.testCase}`);
+
+      for (const booking of scenario.bookings) {
+
+        const checkIn = getFutureDate(
+          booking.checkInOffset
+        );
+
+        const checkOut = getFutureDate(
+          booking.checkOutOffset
+        );
+
+        console.log(
+          `Booking ${booking.roomType} room`
+        );
+
+        // Select dates
+        await bookingPage.selectDates(
+          checkIn,
+          checkOut
+        );
+
+        // Select room dynamically
+        await bookingPage.selectDynamicRoom(
+          booking.roomType
+        );
+
+        // Select quantity
+        await bookingPage.selectRoomQuantity(
+          booking.quantity
+        );
+
+        // Open booking form
+        await bookingPage.openBookingForm();
+
+        // Fill booking details
+        await bookingPage.fillBookingDetails(
+          bookingData.TC_001.firstname,
+          bookingData.TC_001.lastname,
+          bookingData.TC_001.email,
+          bookingData.TC_001.phone
+        );
+
+        // Confirm booking
+        await bookingPage.confirmBooking();
+
+        // Verify success
+        await bookingPage.verifyBookingSuccess();
+
+        console.log(
+          `${booking.roomType} room booked successfully`
+        );
+      }
+    }
+  );
+}

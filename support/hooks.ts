@@ -17,28 +17,24 @@ let browser: Browser;
 
 let page: Page;
 
-
 Before(async function () {
 
   browser = await chromium.launch({
 
     headless: false,
 
-    slowMo: 800
+    slowMo: 500
   });
 
   page = await browser.newPage();
 
-  // Make page globally available
   this.page = page;
 });
-
 
 After(async function ({ result, pickle }) {
 
   const page: Page = this.page;
 
-  // Screenshot on failure
   if (result?.status === Status.FAILED) {
 
     await page.screenshot({

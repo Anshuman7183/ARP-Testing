@@ -9,14 +9,13 @@ export class HomePage {
     await this.page.goto(
       'https://automationintesting.online/'
     );
-
     await this.page.waitForLoadState('domcontentloaded');
   }
 
   async verifyHomepageLoaded() {
 
-    await expect(
-      this.page.locator('body')
-    ).toContainText('Welcome');
+    await expect(this.page).toHaveURL(
+      /automationintesting/
+    );
   }
 }

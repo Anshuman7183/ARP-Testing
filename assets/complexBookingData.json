@@ -1,0 +1,187 @@
+[
+  {
+    "testCase": "TC1 Single + Double Same Dates",
+    "bookings": [
+      {
+        "roomType": "single",
+        "checkInOffset": 2,
+        "checkOutOffset": 5,
+        "quantity": 1
+      },
+      {
+        "roomType": "double",
+        "checkInOffset": 2,
+        "checkOutOffset": 5,
+        "quantity": 1
+      }
+    ]
+  },
+
+  {
+    "testCase": "TC2 Different Room Durations",
+    "bookings": [
+      {
+        "roomType": "single",
+        "checkInOffset": 2,
+        "checkOutOffset": 4,
+        "quantity": 1
+      },
+      {
+        "roomType": "double",
+        "checkInOffset": 3,
+        "checkOutOffset": 7,
+        "quantity": 1
+      },
+      {
+        "roomType": "suite",
+        "checkInOffset": 5,
+        "checkOutOffset": 6,
+        "quantity": 1
+      }
+    ]
+  },
+
+  {
+    "testCase": "TC3 Overlapping Dates",
+    "bookings": [
+      {
+        "roomType": "single",
+        "checkInOffset": 2,
+        "checkOutOffset": 5,
+        "quantity": 1
+      },
+      {
+        "roomType": "double",
+        "checkInOffset": 4,
+        "checkOutOffset": 8,
+        "quantity": 1
+      }
+    ]
+  },
+
+  {
+    "testCase": "TC4 Multiple Quantities",
+    "bookings": [
+      {
+        "roomType": "single",
+        "checkInOffset": 3,
+        "checkOutOffset": 6,
+        "quantity": 2
+      },
+      {
+        "roomType": "double",
+        "checkInOffset": 3,
+        "checkOutOffset": 6,
+        "quantity": 3
+      }
+    ]
+  },
+
+  {
+    "testCase": "TC5 Sequential Booking",
+    "bookings": [
+      {
+        "roomType": "single",
+        "checkInOffset": 2,
+        "checkOutOffset": 4,
+        "quantity": 1
+      },
+      {
+        "roomType": "double",
+        "checkInOffset": 5,
+        "checkOutOffset": 8,
+        "quantity": 1
+      }
+    ]
+  },
+
+  {
+    "testCase": "TC6 Partial Availability",
+    "bookings": [
+      {
+        "roomType": "single",
+        "checkInOffset": 2,
+        "checkOutOffset": 5,
+        "quantity": 1
+      },
+      {
+        "roomType": "suite",
+        "checkInOffset": 2,
+        "checkOutOffset": 5,
+        "quantity": 1
+      }
+    ]
+  },
+
+  {
+    "testCase": "TC7 Cross Month Booking",
+    "bookings": [
+      {
+        "roomType": "single",
+        "checkInOffset": 10,
+        "checkOutOffset": 15,
+        "quantity": 1
+      },
+      {
+        "roomType": "double",
+        "checkInOffset": 12,
+        "checkOutOffset": 18,
+        "quantity": 1
+      }
+    ]
+  },
+
+  {
+    "testCase": "TC8 Same Room Different Dates",
+    "bookings": [
+      {
+        "roomType": "single",
+        "checkInOffset": 2,
+        "checkOutOffset": 5,
+        "quantity": 1
+      },
+      {
+        "roomType": "single",
+        "checkInOffset": 7,
+        "checkOutOffset": 10,
+        "quantity": 1
+      }
+    ]
+  },
+
+  {
+    "testCase": "TC9 Large Combination",
+    "bookings": [
+      {
+        "roomType": "single",
+        "checkInOffset": 2,
+        "checkOutOffset": 7,
+        "quantity": 3
+      },
+      {
+        "roomType": "double",
+        "checkInOffset": 3,
+        "checkOutOffset": 8,
+        "quantity": 3
+      },
+      {
+        "roomType": "suite",
+        "checkInOffset": 4,
+        "checkOutOffset": 9,
+        "quantity": 2
+      }
+    ]
+  },
+
+  {
+    "testCase": "TC10 Concurrent Booking",
+    "bookings": [
+      {
+        "roomType": "double",
+        "checkInOffset": 2,
+        "checkOutOffset": 6,
+        "quantity": 1
+      }
+    ]
+  }
+]

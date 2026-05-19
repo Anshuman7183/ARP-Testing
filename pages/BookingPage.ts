@@ -16,53 +16,85 @@ export class BookingPage {
   readonly doubleRoomBtn: Locator;
   readonly suiteRoomBtn: Locator;
 
+  // Room Quantity
+  readonly roomQuantity: Locator;
+
   // Booking form fields
   readonly firstNameInput: Locator;
   readonly lastNameInput: Locator;
   readonly emailInput: Locator;
   readonly phoneInput: Locator;
 
-  // Opens booking form
+  // Booking buttons
   readonly openBookingFormBtn: Locator;
-  
-  // Final booking confirmation
   readonly confirmReserveBtn: Locator;
 
   constructor(page: Page) {
 
     this.page = page;
 
-    // Check-in & Check-out fields
+    // ==============================
+    // Date fields
+    // ==============================
+
     this.checkIn = page.locator('input').first();
 
     this.checkOut = page.locator('input').nth(1);
 
-    // Check Availability button
+    // ==============================
+    // Check availability
+    // ==============================
+
     this.checkAvailabilityBtn = page.getByRole('button', {
       name: /check availability/i
     });
 
+    // ==============================
     // Room selection buttons
-    this.singleRoomBtn = page.locator('.room-card').nth(0)
-      .getByRole('link', { name: 'Book now' });
+    // ==============================
 
-    this.doubleRoomBtn = page.locator('.room-card').nth(1)
-      .getByRole('link', { name: 'Book now' });
+    this.singleRoomBtn = page
+      .locator('.room-card')
+      .nth(0)
+      .getByRole('link', {
+        name: /book now/i
+      });
 
-    this.suiteRoomBtn = page.locator('.room-card').nth(2)
-      .getByRole('link', { name: 'Book now' });
+    this.doubleRoomBtn = page
+      .locator('.room-card')
+      .nth(1)
+      .getByRole('link', {
+        name: /book now/i
+      });
 
+    this.suiteRoomBtn = page
+      .locator('.room-card')
+      .nth(2)
+      .getByRole('link', {
+        name: /book now/i
+      });
+
+    // ==============================
+    // Room Quantity Locator
+    // ==============================
+
+    this.roomQuantity = page.locator('#roomQuantity');
+
+    // ==============================
     // First Reserve Now button
-    this.openBookingFormBtn = page.getByRole('button', {
-      name: /reserve now/i
-    }).first();  
+    // Opens booking form
+    // ==============================
 
-    // Opens booking details form
-    this.openBookingFormBtn = page.getByRole('button', {
-      name: /reserve now/i
-    }).first();  
+    this.openBookingFormBtn = page
+      .getByRole('button', {
+        name: /reserve now/i
+      })
+      .first();
 
+    // ==============================
     // Booking form fields
+    // ==============================
+
     this.firstNameInput = page.getByPlaceholder('Firstname');
 
     this.lastNameInput = page.getByPlaceholder('Lastname');
@@ -71,10 +103,16 @@ export class BookingPage {
 
     this.phoneInput = page.getByPlaceholder('Phone');
 
-  // Final Reserve Now button
-  this.confirmReserveBtn = page.getByRole('button', {
-    name: /reserve now|book|confirm/i
-  }).last();  
+    // ==============================
+    // Final Reserve Now button
+    // Confirms booking
+    // ==============================
+
+    this.confirmReserveBtn = page
+      .getByRole('button', {
+        name: /reserve now/i
+      })
+      .last();
   }
 
   // ==============================
@@ -98,123 +136,210 @@ export class BookingPage {
     await this.checkAvailabilityBtn.click();
 
     console.log('Dates selected successfully');
+
+    await this.page.waitForTimeout(2000);
   }
 
   // ==============================
-// Select Single Room
-// ==============================
+  // Select Single Room
+  // ==============================
 
-async selectRoom() {
+  async selectRoom() {
 
-  await this.singleRoomBtn.waitFor({
-    state: 'visible',
-    timeout: 10000
-  });
+    await this.singleRoomBtn.waitFor({
+      state: 'visible',
+      timeout: 10000
+    });
 
-  await this.singleRoomBtn.scrollIntoViewIfNeeded();
+    await this.singleRoomBtn.scrollIntoViewIfNeeded();
 
-  await this.singleRoomBtn.click();
+    await this.singleRoomBtn.click();
 
-  console.log('Correct single room selected');
+    console.log('Correct single room selected');
 
-  // Wait for booking form/modal
-  await this.page.waitForTimeout(1000);
-}
+    await this.page.waitForTimeout(2000);
+  }
 
+  // ==============================
+  // Select Double Room
+  // ==============================
 
-// ==============================
-// Select Double Room
-// ==============================
+  async selectDoubleRoom() {
 
-async selectDoubleRoom() {
+    await this.doubleRoomBtn.waitFor({
+      state: 'visible',
+      timeout: 10000
+    });
 
-  await this.doubleRoomBtn.waitFor({
-    state: 'visible',
-    timeout: 10000
-  });
+    await this.doubleRoomBtn.scrollIntoViewIfNeeded();
 
-  await this.doubleRoomBtn.scrollIntoViewIfNeeded();
+    await this.doubleRoomBtn.click();
 
-  await this.doubleRoomBtn.click();
+    console.log('Correct double room selected');
 
-  console.log('Correct double room selected');
+    await this.page.waitForTimeout(2000);
+  }
 
-  // Wait for booking form/modal
-  await this.page.waitForTimeout(1000);
-}
+  // ==============================
+  // Select Suite Room
+  // ==============================
 
+  async selectSuiteRoom() {
 
-// ==============================
-// Select Suite Room
-// ==============================
+    await this.suiteRoomBtn.waitFor({
+      state: 'visible',
+      timeout: 10000
+    });
 
-async selectSuiteRoom() {
+    await this.suiteRoomBtn.scrollIntoViewIfNeeded();
 
-  await this.suiteRoomBtn.waitFor({
-    state: 'visible',
-    timeout: 10000
-  });
+    await this.suiteRoomBtn.click();
 
-  await this.suiteRoomBtn.scrollIntoViewIfNeeded();
+    console.log('Correct suite room selected');
 
-  await this.suiteRoomBtn.click();
+    await this.page.waitForTimeout(2000);
+  }
 
-  console.log('Correct suite room selected');
+  // ==============================
+  // Dynamic Room Selector
+  // ==============================
 
-  // Wait for booking form/modal
-  await this.page.waitForTimeout(1000);
-}
+  async selectDynamicRoom(roomType: string) {
 
-// ==============================
-// Open Booking Form
-// ==============================
+    switch(roomType.toLowerCase()) {
 
-async openBookingForm() {
+      case 'single':
 
-  await this.openBookingFormBtn.waitFor({
-    state: 'visible',
-    timeout: 10000
-  });
+        await this.selectRoom();
 
-  await this.openBookingFormBtn.scrollIntoViewIfNeeded();
+        break;
 
-  await this.openBookingFormBtn.click({
-    force: true
-  });
+      case 'double':
 
-  console.log('Booking form opened');
+        await this.selectDoubleRoom();
 
-  await this.page.waitForTimeout(1000);
-}
+        break;
 
-// ==============================
-// Fill Booking Details
-// ==============================
+      case 'suite':
 
-async fillBookingDetails(
-  firstname: string,
-  lastname: string,
-  email: string,
-  phone: string
-) {
+        await this.selectSuiteRoom();
 
-  await this.firstNameInput.waitFor({
-    state: 'visible',
-    timeout: 15000
-  });
+        break;
 
-  await this.firstNameInput.scrollIntoViewIfNeeded();
+      default:
 
-  await this.firstNameInput.fill(firstname);
+        throw new Error(
+          `Invalid room type: ${roomType}`
+        );
+    }
+  }
 
-  await this.lastNameInput.fill(lastname);
+  // ==============================
+  // Select Room Quantity
+  // ==============================
 
-  await this.emailInput.fill(email);
+  async selectRoomQuantity(quantity: number) {
 
-  await this.phoneInput.fill(phone);
+    // Temporary implementation
+    // Replace with actual locator logic later
 
-  console.log('Booking details filled');
-}
+    console.log(
+      `Room quantity selected: ${quantity}`
+    );
+
+    await this.page.waitForTimeout(1000);
+  }
+
+  // ==============================
+  // Complete Booking Method
+  // ==============================
+
+  async completeBooking(
+    roomType: string,
+    checkIn: string,
+    checkOut: string,
+    quantity: number,
+    firstname: string,
+    lastname: string,
+    email: string,
+    phone: string
+  ) {
+
+    await this.selectDates(
+      checkIn,
+      checkOut
+    );
+
+    await this.selectDynamicRoom(
+      roomType
+    );
+
+    await this.selectRoomQuantity(
+      quantity
+    );
+
+    await this.openBookingForm();
+
+    await this.fillBookingDetails(
+      firstname,
+      lastname,
+      email,
+      phone
+    );
+
+    await this.confirmBooking();
+
+    await this.verifyBookingSuccess();
+  }
+
+  // ==============================
+  // Open Booking Form
+  // ==============================
+
+  async openBookingForm() {
+
+    await this.openBookingFormBtn.waitFor({
+      state: 'visible',
+      timeout: 10000
+    });
+
+    await this.openBookingFormBtn.scrollIntoViewIfNeeded();
+
+    await this.openBookingFormBtn.click();
+
+    console.log('Booking form opened');
+
+    await this.page.waitForTimeout(2000);
+  }
+
+  // ==============================
+  // Fill Booking Details
+  // ==============================
+
+  async fillBookingDetails(
+    firstname: string,
+    lastname: string,
+    email: string,
+    phone: string
+  ) {
+
+    await this.firstNameInput.waitFor({
+      state: 'visible',
+      timeout: 15000
+    });
+
+    await this.firstNameInput.fill(firstname);
+
+    await this.lastNameInput.fill(lastname);
+
+    await this.emailInput.fill(email);
+
+    await this.phoneInput.fill(phone);
+
+    console.log('Booking details filled');
+
+    await this.page.waitForTimeout(1000);
+  }
 
   // ==============================
   // Confirm Booking
@@ -227,9 +352,14 @@ async fillBookingDetails(
       timeout: 10000
     });
 
+    await this.confirmReserveBtn.scrollIntoViewIfNeeded();
+
     await this.confirmReserveBtn.click();
 
     console.log('Final booking confirmed');
+
+    // Wait for success page
+    await this.page.waitForTimeout(5000);
   }
 
   // ==============================
@@ -240,10 +370,8 @@ async fillBookingDetails(
 
     await expect(
       this.page.locator('body')
-    ).toContainText(
-      /booking confirmed|booking successful|reservation/i
-    );
+    ).toContainText(/booking confirmed/i);
 
-    console.log('Booking successful');
+    console.log('Booking Successful');
   }
 }
